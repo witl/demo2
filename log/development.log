@@ -1,0 +1,1317 @@
+  [1m[36mEXECUTE (0.0ms)[0m  [1mUSE [testdb][0m
+  [1m[35mEXECUTE (0.0ms)[0m  CREATE TABLE [schema_migrations] ([version] varchar(255) NOT NULL) 
+  [1m[36mSQL (109.4ms)[0m  [1mEXEC sp_helpindex [schema_migrations][0m
+  [1m[35mEXECUTE (15.6ms)[0m  CREATE UNIQUE INDEX [unique_schema_migrations] ON [schema_migrations] ([version])
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT [schema_migrations].[version] FROM [schema_migrations][0m
+Migrating to CreateProducts (20110706102147)
+  [1m[35mEXECUTE (0.0ms)[0m  BEGIN TRANSACTION
+  [1m[36mEXECUTE (15.6ms)[0m  [1mCREATE TABLE [products] ([id] int NOT NULL IDENTITY(1,1) PRIMARY KEY, [title] varchar(255), [description] varchar(max), [image_url] varchar(255), [price] decimal(8,2), [created_at] datetime, [updated_at] datetime) [0m
+  [1m[35mEXECUTE (31.2ms)[0m  INSERT INTO [schema_migrations] ([version]) VALUES (N'20110706102147')
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT CAST(SCOPE_IDENTITY() AS bigint) AS Ident[0m
+  [1m[35mEXECUTE (0.0ms)[0m  COMMIT TRANSACTION
+Migrating to CreateUsers (20110706110814)
+  [1m[36mEXECUTE (0.0ms)[0m  [1mBEGIN TRANSACTION[0m
+  [1m[35mEXECUTE (0.0ms)[0m  CREATE TABLE [users] ([id] int NOT NULL IDENTITY(1,1) PRIMARY KEY, [created_at] datetime, [updated_at] datetime) 
+  [1m[36mEXECUTE (0.0ms)[0m  [1mINSERT INTO [schema_migrations] ([version]) VALUES (N'20110706110814')[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT CAST(SCOPE_IDENTITY() AS bigint) AS Ident
+  [1m[36mEXECUTE (0.0ms)[0m  [1mCOMMIT TRANSACTION[0m
+Migrating to CreateProduct1s (20110706111901)
+  [1m[35mEXECUTE (0.0ms)[0m  BEGIN TRANSACTION
+  [1m[36mEXECUTE (0.0ms)[0m  [1mCREATE TABLE [product1s] ([id] int NOT NULL IDENTITY(1,1) PRIMARY KEY, [title] varchar(255), [description] varchar(max), [image_url] varchar(255), [price] decimal(8,2), [created_at] datetime, [updated_at] datetime) [0m
+  [1m[35mEXECUTE (0.0ms)[0m  INSERT INTO [schema_migrations] ([version]) VALUES (N'20110706111901')
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT CAST(SCOPE_IDENTITY() AS bigint) AS Ident[0m
+  [1m[35mEXECUTE (0.0ms)[0m  COMMIT TRANSACTION
+Migrating to CreateSales (20110706112232)
+  [1m[36mEXECUTE (0.0ms)[0m  [1mBEGIN TRANSACTION[0m
+  [1m[35mEXECUTE (0.0ms)[0m  CREATE TABLE [sales] ([id] int NOT NULL IDENTITY(1,1) PRIMARY KEY, [title] varchar(255), [description] varchar(max), [image_url] varchar(255), [price] decimal(8,2), [created_at] datetime, [updated_at] datetime) 
+  [1m[36mEXECUTE (0.0ms)[0m  [1mINSERT INTO [schema_migrations] ([version]) VALUES (N'20110706112232')[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT CAST(SCOPE_IDENTITY() AS bigint) AS Ident
+  [1m[36mEXECUTE (15.6ms)[0m  [1mCOMMIT TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT [schema_migrations].[version] FROM [schema_migrations]
+  [1m[36mSQL (15.6ms)[0m  [1mEXEC sp_helpindex [product1s][0m
+  [1m[35mSQL (0.0ms)[0m  EXEC sp_helpindex [products]
+  [1m[36mSQL (15.6ms)[0m  [1mEXEC sp_helpindex [sales][0m
+  [1m[35mSQL (0.0ms)[0m  EXEC sp_helpindex [users]
+
+
+Started GET "/sale" for 127.0.0.1 at Wed Jul 06 16:58:42 +0530 2011
+  [1m[36mEXECUTE (0.0ms)[0m  [1mUSE [testdb][0m
+
+ActionController::RoutingError (No route matches "/sale"):
+  
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 16:58:47 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (15.6ms)[0m  SELECT [sales].* FROM [sales]
+ERROR: compiling _app_views_sales_index_html_erb___988551865_36652248_0 RAISED compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^
+Function body:           def _app_views_sales_index_html_erb___988551865_36652248_0(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "sales/index";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new;@output_buffer.safe_concat('<h1>Listing sales</h1>
+
+<table>
+  <tr>
+    <th>\\title</th>
+    <th>Description</th>
+    <th>Image url</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+');@output_buffer.append_if_string=  @sales.each do |sale| 
+@output_buffer.safe_concat('  <tr>
+    <td>');@output_buffer.append= ( sale.\title );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.description );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.image_url );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.price );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Show', sale );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Edit', edit_sale_path(sale) );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete );@output_buffer.safe_concat('</td>
+  </tr>
+'); end 
+@output_buffer.safe_concat('</table>
+
+<br />
+
+');@output_buffer.append= ( link_to 'New Sale', new_sale_path );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: C:/Sites/pradeep/app/views/sales/index.html.erb:33:in `compile'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:134:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:54:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:127:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:59:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:56:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:26:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:115:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:109:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:102:in `render_to_string'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:93:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:17:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:39:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:14:in `default_render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:261:in `retrieve_response_from_mimes'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `respond_to'
+C:/Sites/pradeep/app/controllers/sales_controller.rb:7:in `index'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:150:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:11:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:18:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:436:in `_run__627343491__process_action__199225275__callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `_run_process_action_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `run_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rescue.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:119:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:41:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:138:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:178:in `action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:27:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:148:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:93:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:68:in `optimized_each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:92:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:139:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:493:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/head.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/flash.rb:182:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:32:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:12:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:31:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/logger.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `synchronize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/static.rb:30:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:168:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `method_missing'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/log_tailer.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:95:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:23:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:82:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:13:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/server.rb:217:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands/server.rb:65:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:30
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27:in `tap'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+Rendered sales/index.html.erb within layouts/application (15.6ms)
+Completed   in 141ms
+
+ActionView::Template::Error (compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^):
+    13: 
+    14: <% @sales.each do |sale| %>
+    15:   <tr>
+    16:     <td><%= sale.\title %></td>
+    17:     <td><%= sale.description %></td>
+    18:     <td><%= sale.image_url %></td>
+    19:     <td><%= sale.price %></td>
+  app/views/sales/index.html.erb:33:in `compile'
+  app/controllers/sales_controller.rb:7:in `index'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.6ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 16:59:49 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT [sales].* FROM [sales][0m
+ERROR: compiling _app_views_sales_index_html_erb___988551865_37968756_0 RAISED compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^
+Function body:           def _app_views_sales_index_html_erb___988551865_37968756_0(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "sales/index";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new;@output_buffer.safe_concat('<h1>Listing sales</h1>
+
+<table>
+  <tr>
+    <th>\\title</th>
+    <th>Description</th>
+    <th>Image url</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+');@output_buffer.append_if_string=  @sales.each do |sale| 
+@output_buffer.safe_concat('  <tr>
+    <td>');@output_buffer.append= ( sale.\title );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.description );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.image_url );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.price );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Show', sale );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Edit', edit_sale_path(sale) );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete );@output_buffer.safe_concat('</td>
+  </tr>
+'); end 
+@output_buffer.safe_concat('</table>
+
+<br />
+
+');@output_buffer.append= ( link_to 'New Sale', new_sale_path );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: C:/Sites/pradeep/app/views/sales/index.html.erb:33:in `compile'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:134:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:54:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:127:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:59:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:56:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:26:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:115:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:109:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:102:in `render_to_string'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:93:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:17:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:39:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:14:in `default_render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:261:in `retrieve_response_from_mimes'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `respond_to'
+C:/Sites/pradeep/app/controllers/sales_controller.rb:7:in `index'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:150:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:11:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:18:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:436:in `_run__627343491__process_action__199225275__callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `_run_process_action_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `run_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rescue.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:119:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:41:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:138:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:178:in `action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:27:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:148:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:93:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:68:in `optimized_each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:92:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:139:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:493:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/head.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/flash.rb:182:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:32:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:12:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:31:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/logger.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `synchronize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/static.rb:30:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:168:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `method_missing'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/log_tailer.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:95:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:23:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:82:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:13:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/server.rb:217:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands/server.rb:65:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:30
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27:in `tap'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+Rendered sales/index.html.erb within layouts/application (0.0ms)
+Completed   in 78ms
+
+ActionView::Template::Error (compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^):
+    13: 
+    14: <% @sales.each do |sale| %>
+    15:   <tr>
+    16:     <td><%= sale.\title %></td>
+    17:     <td><%= sale.description %></td>
+    18:     <td><%= sale.image_url %></td>
+    19:     <td><%= sale.price %></td>
+  app/views/sales/index.html.erb:33:in `compile'
+  app/controllers/sales_controller.rb:7:in `index'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.6ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:00:48 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (0.0ms)[0m  SELECT [sales].* FROM [sales]
+ERROR: compiling _app_views_sales_index_html_erb___988551865_37490676_0 RAISED compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^
+Function body:           def _app_views_sales_index_html_erb___988551865_37490676_0(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "sales/index";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new;@output_buffer.safe_concat('<h1>Listing sales</h1>
+
+<table>
+  <tr>
+    <th>\\title</th>
+    <th>Description</th>
+    <th>Image url</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+');@output_buffer.append_if_string=  @sales.each do |sale| 
+@output_buffer.safe_concat('  <tr>
+    <td>');@output_buffer.append= ( sale.\title );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.description );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.image_url );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.price );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Show', sale );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Edit', edit_sale_path(sale) );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete );@output_buffer.safe_concat('</td>
+  </tr>
+'); end 
+@output_buffer.safe_concat('</table>
+
+<br />
+
+');@output_buffer.append= ( link_to 'New Sale', new_sale_path );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: C:/Sites/pradeep/app/views/sales/index.html.erb:33:in `compile'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:134:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:54:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:127:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:59:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:56:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:26:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:115:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:109:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:102:in `render_to_string'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:93:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:17:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:39:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:14:in `default_render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:261:in `retrieve_response_from_mimes'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `respond_to'
+C:/Sites/pradeep/app/controllers/sales_controller.rb:7:in `index'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:150:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:11:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:18:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:436:in `_run__627343491__process_action__199225275__callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `_run_process_action_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `run_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rescue.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:119:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:41:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:138:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:178:in `action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:27:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:148:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:93:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:68:in `optimized_each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:92:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:139:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:493:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/head.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/flash.rb:182:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:32:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:12:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:31:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/logger.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `synchronize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/static.rb:30:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:168:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `method_missing'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/log_tailer.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:95:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:23:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:82:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:13:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/server.rb:217:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands/server.rb:65:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:30
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27:in `tap'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+Rendered sales/index.html.erb within layouts/application (0.0ms)
+Completed   in 16ms
+
+ActionView::Template::Error (compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^):
+    13: 
+    14: <% @sales.each do |sale| %>
+    15:   <tr>
+    16:     <td><%= sale.\title %></td>
+    17:     <td><%= sale.description %></td>
+    18:     <td><%= sale.image_url %></td>
+    19:     <td><%= sale.price %></td>
+  app/views/sales/index.html.erb:33:in `compile'
+  app/controllers/sales_controller.rb:7:in `index'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.6ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:01:06 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT [sales].* FROM [sales][0m
+ERROR: compiling _app_views_sales_index_html_erb___988551865_36972264_0 RAISED compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^
+Function body:           def _app_views_sales_index_html_erb___988551865_36972264_0(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "sales/index";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new;@output_buffer.safe_concat('<h1>Listing sales</h1>
+
+<table>
+  <tr>
+    <th>\\title</th>
+    <th>Description</th>
+    <th>Image url</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+');@output_buffer.append_if_string=  @sales.each do |sale| 
+@output_buffer.safe_concat('  <tr>
+    <td>');@output_buffer.append= ( sale.\title );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.description );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.image_url );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( sale.price );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Show', sale );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Edit', edit_sale_path(sale) );@output_buffer.safe_concat('</td>
+    <td>');@output_buffer.append= ( link_to 'Destroy', sale, :confirm => 'Are you sure?', :method => :delete );@output_buffer.safe_concat('</td>
+  </tr>
+'); end 
+@output_buffer.safe_concat('</table>
+
+<br />
+
+');@output_buffer.append= ( link_to 'New Sale', new_sale_path );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: C:/Sites/pradeep/app/views/sales/index.html.erb:33:in `compile'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:134:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:54:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:127:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:59:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:56:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:26:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:115:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:109:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:102:in `render_to_string'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:93:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:17:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:39:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:14:in `default_render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:261:in `retrieve_response_from_mimes'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `respond_to'
+C:/Sites/pradeep/app/controllers/sales_controller.rb:7:in `index'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:150:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:11:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:18:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:436:in `_run__627343491__process_action__199225275__callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `_run_process_action_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `run_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rescue.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:119:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:41:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:138:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:178:in `action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:27:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:148:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:93:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:68:in `optimized_each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:92:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:139:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:493:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/head.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/flash.rb:182:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:32:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:12:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:31:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/logger.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `synchronize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/static.rb:30:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:168:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `method_missing'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/log_tailer.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:95:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:23:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:82:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:13:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/server.rb:217:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands/server.rb:65:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:30
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27:in `tap'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+Rendered sales/index.html.erb within layouts/application (0.0ms)
+Completed   in 16ms
+
+ActionView::Template::Error (compile error
+C:/Sites/pradeep/app/views/sales/index.html.erb:16: syntax error, unexpected $undefined
+...output_buffer.append= ( sale.\title );@output_buffer.safe_co...
+                              ^):
+    13: 
+    14: <% @sales.each do |sale| %>
+    15:   <tr>
+    16:     <td><%= sale.\title %></td>
+    17:     <td><%= sale.description %></td>
+    18:     <td><%= sale.image_url %></td>
+    19:     <td><%= sale.price %></td>
+  app/views/sales/index.html.erb:33:in `compile'
+  app/controllers/sales_controller.rb:7:in `index'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (15.6ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (15.6ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (31.2ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:01:37 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (0.0ms)[0m  SELECT [sales].* FROM [sales]
+Rendered sales/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 31ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales/new" for 127.0.0.1 at Wed Jul 06 17:01:40 +0530 2011
+  Processing by SalesController#new as HTML
+Rendered sales/_form.html.erb (62.5ms)
+Rendered sales/new.html.erb within layouts/application (62.5ms)
+Completed 200 OK in 78ms (Views: 78.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sales" for 127.0.0.1 at Wed Jul 06 17:01:49 +0530 2011
+  Processing by SalesController#create as HTML
+  Parameters: {"commit"=>"Create Sale", "authenticity_token"=>"l6SJtJXnDjjB92rZWLGEUZIjtan8T1K6YM5zBum1J5g=", "utf8"=>"✓", "sale"=>{"price"=>"1000", "title"=>"hi", "image_url"=>"hi", "description"=>"hi"}}
+  [1m[36mEXECUTE (0.0ms)[0m  [1mBEGIN TRANSACTION[0m
+  [1m[35mAREL (31.2ms)[0m  INSERT INTO [sales] ([description], [image_url], [created_at], [title], [updated_at], [price]) VALUES (N'hi', N'hi', '2011-07-06 11:31:50.000', N'hi', '2011-07-06 11:31:50.000', 1000.0)
+  [1m[36mSQL (0.0ms)[0m  [1mSELECT CAST(SCOPE_IDENTITY() AS bigint) AS Ident[0m
+  [1m[35mEXECUTE (0.0ms)[0m  COMMIT TRANSACTION
+Redirected to http://localhost:3000/sales/1
+Completed 302 Found in 109ms
+
+
+Started GET "/sales/1" for 127.0.0.1 at Wed Jul 06 17:01:50 +0530 2011
+  Processing by SalesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT TOP (1) [sales].* FROM [sales] WHERE [sales].[id] = N'1'[0m
+ERROR: compiling _app_views_sales_show_html_erb___695746803_37411572_0 RAISED compile error
+C:/Sites/pradeep/app/views/sales/show.html.erb:5: syntax error, unexpected $undefined
+...utput_buffer.append= ( @sale.\title );@output_buffer.safe_co...
+                              ^
+Function body:           def _app_views_sales_show_html_erb___695746803_37411572_0(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "sales/show";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new;@output_buffer.safe_concat('<p id="notice">');@output_buffer.append= ( notice );@output_buffer.safe_concat('</p>
+
+<p>
+  <b>\\title:</b>
+  ');@output_buffer.append= ( @sale.\title );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+<p>
+  <b>Description:</b>
+  ');@output_buffer.append= ( @sale.description );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+<p>
+  <b>Image url:</b>
+  ');@output_buffer.append= ( @sale.image_url );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+<p>
+  <b>Price:</b>
+  ');@output_buffer.append= ( @sale.price );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+
+');@output_buffer.append= ( link_to 'Edit', edit_sale_path(@sale) );@output_buffer.safe_concat(' |
+');@output_buffer.append= ( link_to 'Back', sales_path );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: C:/Sites/pradeep/app/views/sales/show.html.erb:29:in `compile'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:134:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:54:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:127:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:59:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:56:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:26:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:115:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:109:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:102:in `render_to_string'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:93:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:17:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:39:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:14:in `default_render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:261:in `retrieve_response_from_mimes'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `respond_to'
+C:/Sites/pradeep/app/controllers/sales_controller.rb:18:in `show'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:150:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:11:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:18:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:436:in `_run__627343491__process_action__453433196__callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `_run_process_action_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `run_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rescue.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:119:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:41:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:138:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:178:in `action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:27:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:148:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:93:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:89:in `optimized_each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:92:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:139:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:493:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/head.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/flash.rb:182:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:32:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:12:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:31:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/logger.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `synchronize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/static.rb:30:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:168:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `method_missing'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/log_tailer.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:95:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:23:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:82:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:13:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/server.rb:217:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands/server.rb:65:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:30
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27:in `tap'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+Rendered sales/show.html.erb within layouts/application (0.0ms)
+Completed   in 62ms
+
+ActionView::Template::Error (compile error
+C:/Sites/pradeep/app/views/sales/show.html.erb:5: syntax error, unexpected $undefined
+...utput_buffer.append= ( @sale.\title );@output_buffer.safe_co...
+                              ^):
+    2: 
+    3: <p>
+    4:   <b>\title:</b>
+    5:   <%= @sale.\title %>
+    6: </p>
+    7: 
+    8: <p>
+  app/views/sales/show.html.erb:29:in `compile'
+  app/controllers/sales_controller.rb:18:in `show'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (15.6ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (46.9ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (62.5ms)
+
+
+Started GET "/sales/1" for 127.0.0.1 at Wed Jul 06 17:02:14 +0530 2011
+  [1m[35mEXECUTE (0.0ms)[0m  USE [testdb]
+  Processing by SalesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT TOP (1) [sales].* FROM [sales] WHERE [sales].[id] = N'1'[0m
+ERROR: compiling _app_views_sales_show_html_erb___695746803_36791160_0 RAISED compile error
+C:/Sites/pradeep/app/views/sales/show.html.erb:5: syntax error, unexpected $undefined
+...utput_buffer.append= ( @sale.\title );@output_buffer.safe_co...
+                              ^
+Function body:           def _app_views_sales_show_html_erb___695746803_36791160_0(local_assigns)
+            _old_virtual_path, @_virtual_path = @_virtual_path, "sales/show";_old_output_buffer = @output_buffer;;@output_buffer = ActionView::OutputBuffer.new;@output_buffer.safe_concat('<p id="notice">');@output_buffer.append= ( notice );@output_buffer.safe_concat('</p>
+
+<p>
+  <b>title:</b>
+  ');@output_buffer.append= ( @sale.\title );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+<p>
+  <b>Description:</b>
+  ');@output_buffer.append= ( @sale.description );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+<p>
+  <b>Image url:</b>
+  ');@output_buffer.append= ( @sale.image_url );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+<p>
+  <b>Price:</b>
+  ');@output_buffer.append= ( @sale.price );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('</p>
+
+
+');@output_buffer.append= ( link_to 'Edit', edit_sale_path(@sale) );@output_buffer.safe_concat(' |
+');@output_buffer.append= ( link_to 'Back', sales_path );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @_virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: C:/Sites/pradeep/app/views/sales/show.html.erb:29:in `compile'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:134:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:54:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/template.rb:127:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:59:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:56:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_view/render/rendering.rb:26:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:115:in `_render_template'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:109:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/renderers.rb:47:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/compatibility.rb:55:in `render_to_body'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:102:in `render_to_string'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:93:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:17:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:40:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/railties/controller_runtime.rb:15:in `cleanup_view_runtime'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:39:in `render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:14:in `default_render'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:261:in `retrieve_response_from_mimes'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/mime_responds.rb:192:in `respond_to'
+C:/Sites/pradeep/app/controllers/sales_controller.rb:18:in `show'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:150:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rendering.rb:11:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:18:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:436:in `_run__627343491__process_action__453433196__callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:410:in `_run_process_action_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:94:in `run_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/callbacks.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/notifications.rb:52:in `instrument'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rescue.rb:17:in `process_action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/base.rb:119:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/abstract_controller/rendering.rb:41:in `process'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:138:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_controller/metal.rb:178:in `action'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:62:in `dispatch'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:27:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:148:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:93:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:89:in `optimized_each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/code_generation.rb:92:in `recognize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-mount-0.6.14/lib/rack/mount/route_set.rb:139:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/routing/route_set.rb:493:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/head.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/flash.rb:182:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:32:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:12:in `cache'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/query_cache.rb:31:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activerecord-3.0.7/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/logger.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/activesupport-3.0.7/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `synchronize'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/static.rb:30:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:168:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `send'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/application.rb:77:in `method_missing'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/rack/log_tailer.rb:14:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:95:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `each'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:92:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:23:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/1.8/webrick/server.rb:82:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/handler/webrick.rb:13:in `run'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/rack-1.2.3/lib/rack/server.rb:217:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands/server.rb:65:in `start'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:30
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27:in `tap'
+F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/railties-3.0.7/lib/rails/commands.rb:27
+script/rails:6:in `require'
+script/rails:6
+Rendered sales/show.html.erb within layouts/application (0.0ms)
+Completed   in 16ms
+
+ActionView::Template::Error (compile error
+C:/Sites/pradeep/app/views/sales/show.html.erb:5: syntax error, unexpected $undefined
+...utput_buffer.append= ( @sale.\title );@output_buffer.safe_co...
+                              ^):
+    2: 
+    3: <p>
+    4:   <b>title:</b>
+    5:   <%= @sale.\title %>
+    6: </p>
+    7: 
+    8: <p>
+  app/views/sales/show.html.erb:29:in `compile'
+  app/controllers/sales_controller.rb:18:in `show'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (15.6ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (46.9ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (78.1ms)
+
+
+Started GET "/sales/1" for 127.0.0.1 at Wed Jul 06 17:02:39 +0530 2011
+  Processing by SalesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSale Load (0.0ms)[0m  SELECT TOP (1) [sales].* FROM [sales] WHERE [sales].[id] = N'1'
+Rendered sales/show.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 31ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:02:41 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT [sales].* FROM [sales][0m
+Rendered sales/index.html.erb within layouts/application (125.0ms)
+Completed 200 OK in 234ms (Views: 140.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:10:17 +0530 2011
+  [1m[36mEXECUTE (0.0ms)[0m  [1mUSE [testdb][0m
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (15.6ms)
+Completed   in 31ms
+
+ActionView::Template::Error (undefined local variable or method `sale' for #<#<Class:0x46812d8>:0x46801c8>):
+    2: <p>Welcome to all</p>
+    3: <table>
+    4: 	<tr>
+    5: 		<td><%= link_to 'Show', sale %></td>
+    6: 	</tr>
+    7: </table>
+  app/views/welcome/index.html.erb:5:in `_app_views_welcome_index_html_erb__675568520_36960528_0'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (46.9ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (62.5ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:10:54 +0530 2011
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (0.0ms)
+Completed   in 31ms
+
+ActionView::Template::Error (undefined local variable or method `sales' for #<#<Class:0x4803f00>:0x4802b08>):
+    2: <p>Welcome to all</p>
+    3: <table>
+    4: 	<tr>
+    5: 		<td><%= link_to 'Show', sales %></td>
+    6: 	</tr>
+    7: </table>
+  app/views/welcome/index.html.erb:5:in `_app_views_welcome_index_html_erb__675568520_37752240_0'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (15.6ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (31.2ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:12:22 +0530 2011
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (15.6ms)
+Completed   in 47ms
+
+ActionView::Template::Error (undefined local variable or method `sales' for #<#<Class:0x46d61c0>:0x46d50b0>):
+    2: <p>Welcome to all</p>
+    3: <table>
+    4: 	<tr>
+    5: 		<td>	<%= link_to 'New Sale', sales %></td>
+    6: 	</tr>
+    7: </table>
+  app/views/welcome/index.html.erb:5:in `_app_views_welcome_index_html_erb__675568520_37134444_0'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.6ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:13:13 +0530 2011
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (15.6ms)
+Completed   in 16ms
+
+ActionView::Template::Error (undefined local variable or method `sales' for #<#<Class:0x4781430>:0x4780200>):
+    2: <p>Welcome to all</p>
+    3: <table>
+    4: 	<tr>
+    5: 		<td><%= link_to 'New Sale', sales/index.html %></td>
+    6: 	</tr>
+    7: </table>
+  app/views/welcome/index.html.erb:5:in `_app_views_welcome_index_html_erb__675568520_37484760_0'
+
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.0ms)
+Rendered F:/RailsInstaller/Ruby1.8.7/lib/ruby/gems/1.8/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (15.6ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:14:29 +0530 2011
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 16ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:14:31 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (0.0ms)[0m  SELECT [sales].* FROM [sales]
+Rendered sales/index.html.erb within layouts/application (62.5ms)
+Completed 200 OK in 156ms (Views: 93.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales/new" for 127.0.0.1 at Wed Jul 06 17:14:35 +0530 2011
+  Processing by SalesController#new as HTML
+Rendered sales/_form.html.erb (15.6ms)
+Rendered sales/new.html.erb within layouts/application (46.9ms)
+Completed 200 OK in 62ms (Views: 46.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:15:09 +0530 2011
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 16ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:15:11 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT [sales].* FROM [sales][0m
+Rendered sales/index.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 31ms (Views: 31.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales/new" for 127.0.0.1 at Wed Jul 06 17:15:13 +0530 2011
+  Processing by SalesController#new as HTML
+Rendered sales/_form.html.erb (93.8ms)
+Rendered sales/new.html.erb within layouts/application (93.8ms)
+Completed 200 OK in 125ms (Views: 109.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:15:15 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (0.0ms)[0m  SELECT [sales].* FROM [sales]
+Rendered sales/index.html.erb within layouts/application (125.0ms)
+Completed 200 OK in 141ms (Views: 140.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:20:25 +0530 2011
+  [1m[36mEXECUTE (0.0ms)[0m  [1mUSE [testdb][0m
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 16ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:20:28 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (0.0ms)[0m  SELECT [sales].* FROM [sales]
+Rendered sales/index.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 156ms (Views: 31.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales/1" for 127.0.0.1 at Wed Jul 06 17:20:31 +0530 2011
+  Processing by SalesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT TOP (1) [sales].* FROM [sales] WHERE [sales].[id] = N'1'[0m
+Rendered sales/show.html.erb within layouts/application (125.0ms)
+Completed 200 OK in 156ms (Views: 125.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:20:33 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (0.0ms)[0m  SELECT [sales].* FROM [sales]
+Rendered sales/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 47ms (Views: 31.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at Wed Jul 06 17:33:20 +0530 2011
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 16ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Wed Jul 06 17:33:23 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT [sales].* FROM [sales][0m
+Rendered sales/index.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 31ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at Thu Jul 07 10:42:52 +0530 2011
+  [1m[36mEXECUTE (0.0ms)[0m  [1mUSE [testdb][0m
+  Processing by WelcomeController#index as HTML
+Rendered welcome/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 31ms (Views: 31.2ms | ActiveRecord: 46.9ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Thu Jul 07 10:43:02 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (15.6ms)[0m  SELECT [sales].* FROM [sales]
+Rendered sales/index.html.erb within layouts/application (62.5ms)
+Completed 200 OK in 266ms (Views: 46.9ms | ActiveRecord: 62.5ms)
+
+
+Started GET "/sales/new" for 127.0.0.1 at Thu Jul 07 10:43:09 +0530 2011
+  Processing by SalesController#new as HTML
+Rendered sales/_form.html.erb (140.6ms)
+Rendered sales/new.html.erb within layouts/application (156.2ms)
+Completed 200 OK in 188ms (Views: 187.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Thu Jul 07 10:43:13 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[36mSale Load (0.0ms)[0m  [1mSELECT [sales].* FROM [sales][0m
+Rendered sales/index.html.erb within layouts/application (46.9ms)
+Completed 200 OK in 78ms (Views: 62.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sales" for 127.0.0.1 at Thu Jul 07 10:43:45 +0530 2011
+  Processing by SalesController#index as HTML
+  [1m[35mSale Load (0.0ms)[0m  SELECT [sales].* FROM [sales]
+Rendered sales/index.html.erb within layouts/application (31.2ms)
+Completed 200 OK in 47ms (Views: 46.9ms | ActiveRecord: 0.0ms)
